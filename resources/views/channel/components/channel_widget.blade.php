@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-between align-items-center mb-2">
       <div>
         <div class="rounded-circle">
-           <h5 class=""><img src="storage/{{$channel->tg_dp}}" alt="" srcset="" height="50" class="rounded-circle"> {{$channel->name}} <span class="badge badge-warning">{{$channel->system_action}}</span></h5>
+           <h5 class=""><img src="storage/{{$channel->tg_dp}}" alt="" srcset="" height="50" class="rounded-circle"> {{substr($channel->name,0,12)}} <span class="badge badge-warning">{{$channel->system_action}}</span></h5>
         </div>
        
         

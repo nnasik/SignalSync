@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Channel;
+use Illuminate\Support\Facades\Storage;
 
 class ChannelAPIController extends Controller
 {
@@ -63,17 +64,31 @@ class ChannelAPIController extends Controller
             'image' => 'required|mimes:jpg,jpeg,png|max:2048', // Adjust max size as needed (2MB)
         ]);
 
-        
-
         // Handle the uploaded file
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             // Store the image file in the 'public' disk, in the 'images' folder
             $path = $request->file('image')->store('images', 'public');
-
+            // Find the channel
             $channel = Channel::where('tg_id', $request->tg_id)->first();
+            // Delete the previous image if exists (if it exists)
+            $filePath = public_path('/public/'.$channel->tg_dp);
+
+            if (Storage::exists($filePath)) {
+                // File exists
+                print("File found!");
+            } else {
+                // File does not exist
+                print("File not found!");
+            }
+
+            // print($channel->tg_dp);
+            // if (File::exists($filePath)) {
+            //     File::delete($filePath);
+            // }
+
+            // Update the channel with the new image path and save it
             $channel->tg_dp = $path;
             $channel->save();
-            
             // Return the file path or a success response
             return response()->json([
                 'message' => 'Image uploaded successfully',

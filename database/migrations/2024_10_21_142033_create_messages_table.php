@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('channel_id');
             $table->integer('tg_message_id');
-            $table->string('message');           
+            $table->mediumText('message');           
             $table->timestamps();
 
             $table->foreign('channel_id')->references('id')->on('channels');

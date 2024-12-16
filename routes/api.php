@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChannelAPIController;
+use App\Http\Controllers\MessageAPIController;
 
 Route::get('user', function (Request $request) {
     return $request->user();
@@ -15,4 +16,7 @@ Route::put('channel/{id}', [ChannelAPIController::class, 'update']);  // Update 
 Route::delete('channel/{id}', [ChannelAPIController::class, 'destroy']); // Delete an item
 Route::patch('channel/{id}', [ChannelAPIController::class, 'updatePartial']);
 Route::post('channel/storeDP', [ChannelAPIController::class, 'storeDP']);
+
+Route::post('message', [MessageAPIController::class, 'store']);  // Create a new item
+
 
