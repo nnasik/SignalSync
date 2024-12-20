@@ -27,7 +27,7 @@
       <form method="POST" action="{{ route('register') }}">
          @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Name">
+          <input type="text" placeholder="Name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
           <div class="input-group-append">
             <div class="input-group-text">
